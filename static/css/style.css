@@ -1,5 +1,15 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
 main {
+    flex-grow: 1;
     padding-top: 2em;
+    background: url('/static/backgrounds/fond-vert.jpg') no-repeat center;
+    background-size: cover;
 }
 
 h1 {
