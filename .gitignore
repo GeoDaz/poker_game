@@ -1,4 +1,4 @@
 .vscode
-__pycahce__
+__pycache__
 static/cards/*
 venv
