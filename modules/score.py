@@ -1,25 +1,7 @@
-import random
-
 # const
-HAND_NB = 5
 SEQUENCE = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
 
-# - draws
-def draw(deck: list):
-    card = random.choice(deck)
-    deck.remove(card)
-    return card, deck
-
-
-def multiple_draw(deck: list, nb: int = HAND_NB, cards: list = []):
-    for _ in range(nb):
-        card, deck = draw(deck)
-        cards.append(card)
-    return cards, deck
-
-
-# - score
 def get_card_nb(card: str):
     return card.split('-')[0]
 

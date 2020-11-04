@@ -1,14 +1,7 @@
+# imports
 import random
-from functions import multiple_draw, get_coeff
-
-# const
-HAND_NB = 5
-deck = [
-    '2-h', '3-h', '4-h', '5-h', '6-h', '7-h', '8-h', '9-h', '10-h', 'J-h', 'Q-h', 'K-h', 'A-h',
-    '2-d', '3-d', '4-d', '5-d', '6-d', '7-d', '8-d', '9-d', '10-d', 'J-d', 'Q-d', 'K-d', 'A-d',
-    '2-c', '3-c', '4-c', '5-c', '6-c', '7-c', '8-c', '9-c', '10-c', 'J-c', 'Q-c', 'K-c', 'A-c',
-    '2-s', '3-s', '4-s', '5-s', '6-s', '7-s', '8-s', '9-s', '10-s', 'J-s', 'Q-s', 'K-s', 'A-s'
-]
+from modules.draw import HAND_NB, init_deck, multiple_draw
+from modules.score import get_coeff
 
 
 # functions
@@ -42,7 +35,7 @@ def party(bankroll: int):
     bet = int(input("Mise en € : "))
     while 0 > bet > bankroll:
         bet = int(input("La mise doit être inférieure a la cagnotte : "))
-    hand = drawer(deck)
+    hand = drawer(init_deck())
     coeff, text = get_coeff(hand)
     print(text)
     if coeff > 1:

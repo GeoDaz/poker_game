@@ -1,27 +1,18 @@
+# imports
 from flask import Flask, render_template, request, escape, session, redirect
-from functions import multiple_draw, get_coeff
+from modules.draw import HAND_NB, init_deck, multiple_draw
+from modules.score import get_coeff
 
-app = Flask(__name__)
-app.secret_key = "PokerMachine$$$"
-
-HAND_NB = 5
+# const
 POST = 'POST'
 GET = 'GET'
 
-
-def DECK():
-    return [
-        '2-h', '3-h', '4-h', '5-h', '6-h', '7-h', '8-h', '9-h', '10-h',
-        'J-h', 'Q-h', 'K-h', 'A-h',
-        '2-d', '3-d', '4-d', '5-d', '6-d', '7-d', '8-d', '9-d', '10-d',
-        'J-d', 'Q-d', 'K-d', 'A-d',
-        '2-c', '3-c', '4-c', '5-c', '6-c', '7-c', '8-c', '9-c', '10-c',
-        'J-c', 'Q-c', 'K-c', 'A-c',
-        '2-s', '3-s', '4-s', '5-s', '6-s', '7-s', '8-s', '9-s', '10-s',
-        'J-s', 'Q-s', 'K-s', 'A-s'
-    ]
+# app
+app = Flask(__name__)
+app.secret_key = "PokerMachine$$$"
 
 
+# routes
 @app.route('/')
 def home():
     return render_template(
@@ -60,7 +51,7 @@ def first_draw():
     session['bankroll'] = bankroll
     session['bet'] = bet
     # draw
-    hand, deck = multiple_draw(DECK(), cards=[])
+    hand, deck = multiple_draw(init_deck(), cards=[])
     session['deck'] = deck
     return render_template('first-draw.html', hand=hand)
 
@@ -75,8 +66,8 @@ def second_draw():
     hand, deck = multiple_draw(session['deck'], HAND_NB - len(hand), hand)
     # second draw
     coeff, score_text = get_coeff(hand)
-    session['bankroll'] = session['bankroll'] - \
-        session['bet'] + session['bet'] * coeff
+    session['bankroll'] = session['bankroll'] - session['bet'] \
+        + session['bet'] * coeff
     return render_template(
         'second-draw.html',
         hand=hand,
@@ -87,4 +78,5 @@ def second_draw():
     )
 
 
+# run debug
 app.run(debug=True)
