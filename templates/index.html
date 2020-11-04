@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+<!---->
+{% block head %}<title>Poker Machine $$$</title>{% endblock %}
+<!---->
+{% block body %}
+<h1 class="red">
+    Poker Machine
+    <span class="text-warning">
+        <i class="fas fa-dollar-sign"></i>
+        <i class="fas fa-dollar-sign"></i>
+        <i class="fas fa-dollar-sign"></i>
+    </span>
+</h1>
+<form method="POST" action="/first-draw">
+    <div class="form-group">
+        <label for="bankroll">
+            Cagnotte <span class="text-danger">*</span>
+        </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+            </div>
+            {% if bankroll %}
+            <input
+                type="number"
+                class="form-control"
+                id="bankroll"
+                value="{{ bankroll }}"
+                disabled
+            />
+            <input type="hidden" name="bankroll" value="{{ bankroll }}" />
+            {% else %}
+            <input
+                type="number"
+                class="form-control"
+                id="bankroll"
+                name="bankroll"
+                placeholder="Cagnotte"
+                required
+            />
+            {% endif %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="bet">
+            Mise <span class="text-danger">*</span>
+        </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+            </div>
+            <input
+                type="number"
+                class="form-control"
+                id="bet"
+                name="bet"
+                placeholder="Mise"
+                required
+            />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Piocher</button>
+    {% if bankroll %}
+    <a href="/reset" class="btn btn-primary"> Reset <i class="fas fa-redo"></i> </a>
+    {% endif %}
+</form>
+{% endblock %}

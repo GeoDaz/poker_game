@@ -1,0 +1,16 @@
+main {
+    padding-top: 2em;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+.col-auto {
+    margin-bottom: 1em;
+}
+
+img.card {
+    width: 150px;
+    max-width: 100%;
+}

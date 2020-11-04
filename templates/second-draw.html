@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<!---->
+{% block head %}<title>Poker Machine | Deuxième tirage</title>{% endblock %}
+<!---->
+{% block body %}
+<h1>Deuxième tirage</h1>
+<div class="row">
+    {% for card in hand %}
+    <div class="col-auto">
+        <img
+            class="img-fluid card"
+            alt="carte"
+            src="{{ url_for('static', filename='cards/'+card+'.svg') }}"
+        />
+    </div>
+    {% endfor %}
+</div>
+<p>
+    {{ score_text}}
+    <br />
+    {% if coeff > 1 %} Vous avez gagnez <b>{{ bet * coeff }}&nbsp;€</b>
+    <br />
+    {% endif %}
+    <strong>Votre cagnotte est de {{ bankroll }}&nbsp;€</strong>
+</p>
+<a href="/" class="btn btn-success"> Rejouer <i class="fas fa-redo"></i> </a>
+{% endblock %}

@@ -1,0 +1,4 @@
+.vscode
+__pycahce__
+static/cards/*
+venv
